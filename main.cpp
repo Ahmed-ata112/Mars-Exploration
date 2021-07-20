@@ -8,7 +8,7 @@
 class MyApp : public wxApp
 {
 public:
-	ListboxFrame* listbox;
+	MyCanvas* listbox;
 	virtual bool OnInit();
 };
 
@@ -19,7 +19,7 @@ IMPLEMENT_APP_NO_MAIN(MyApp)
 bool MyApp::OnInit()
 {
 	
-	listbox = new ListboxFrame(wxT("ListboxFrame"));
+	listbox = new MyCanvas(wxT("MyCanvas"));
 	listbox->Show(true);
 
 	return true;
@@ -33,12 +33,17 @@ bool MyApp::OnInit()
 
 int main()
 {
-	wxEntry();
-	MarsStation station_;
+	//wxEntry();
+	
 
-	SIM_MODE mode = station_.get_input_mode();
-
-	station_.execute_mode(mode);
-
+	SIM_MODE mode = UI::get_input_mode();
+	if (mode == SIM_MODE::STEP_BY_STEP) //as i only implement the Step by Step Here
+	{
+		wxEntry();
+	}
+	else {
+		MarsStation station_;
+		station_.execute_mode(mode);
+	}
 	return 0;
 }

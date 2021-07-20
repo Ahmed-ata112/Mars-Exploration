@@ -13,7 +13,7 @@ private:
 	int TL; // Target Location
 	int MD; // Mission Duration
 	bool asigned;
-	int WD; // Waiting Durations
+	int WD; // Waiting Duration
 	int CD; // Complete Date
 	int ED; // Execution days
 

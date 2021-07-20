@@ -37,7 +37,9 @@ private:
 
 	// Events
 	LinkedQueue<Event*> events_list_;
-
+	LinkedQueue<Event*> events_list_follower_;
+	int no_events_today;
+	
 	// User Interface
 	UI* my_ui;
 	int collect_statistics_file(int&, string&);
@@ -69,9 +71,9 @@ public:
 	SIM_MODE get_input_mode() const;
 	void execute_mode(SIM_MODE);
 	bool read_input_file();
-	int get_current_day();
+	int get_current_day() const;
 	bool write_output_file();
-
+	int get_no_events() const;
 
 	// Simulation Functions
 	void simulate_day();
@@ -91,7 +93,7 @@ public:
 	LinkedPriorityQueue<Rover*, double>& get_available_rovers_emergency_();
 	LinkedPriorityQueue<Rover*, double>& get_available_rovers_mountainous_();
 	LinkedPriorityQueue<Rover*, double>& get_available_rovers_polar_();
-
+	LinkedQueue<Event*>& get_follower_events();
 	bool check_last_day();
 	bool check_valid_data();
 	bool check_polar_r_m();
