@@ -95,9 +95,7 @@ public:
 	bool check_last_day();
 	bool check_valid_data();
 	bool check_polar_r_m();
-	void increment_cancelled_m();
-	void increment_formulated_m();
-
+	
 
 	//Destructor
 	~MarsStation();

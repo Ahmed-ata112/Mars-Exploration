@@ -36,3 +36,11 @@ enum class MISSION_STATUS {
 	COMPLETED,
 	CANCELLED
 };
+
+
+int const ID_WAIT_MISS_TEXT = 100;
+int const ID_WAIT_Rovers_TEXT = 101;
+int const ID_CheckUP_ROVER_TEXT = 102;
+const int ID_SLIDER = 103;
+
+const int ID_SLIDER_value = 104;
