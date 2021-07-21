@@ -25,8 +25,3 @@
  - Ahmed Atta
  - Doaa Magdy
  - Rufaida Muhammad
-
-## Professor Supervisor: Dr. Magda Fayek
-## Teacher Assistants Supervisor:
- - Eng. Eman Hossam
- - Eng. Marwa
