@@ -15,6 +15,10 @@ class MyCanvas : public wxFrame
 {
 public:
 	MyCanvas(const wxString& title);
+	wxMessageDialog* error_dial;
+	wxMessageDialog* info_dial;
+
+	
 	MarsStation* p_station;
 	//upper part
 
@@ -58,7 +62,7 @@ public:
 	wxStaticLine* sl2;
 	wxStaticLine* sl3;
 
-
+	~MyCanvas();
 };
 
 MyCanvas::MyCanvas(const wxString& title)
@@ -183,7 +187,47 @@ MyCanvas::MyCanvas(const wxString& title)
 	panel->SetSizer(v_all_box);
 	Center();
 }
+inline MyCanvas::~MyCanvas()
+{
+	delete error_dial;
+	delete info_dial;
 
+
+	delete p_station;
+	//upper part
+
+	delete slider;
+	delete slider_label;
+	delete slider_value;
+	delete Start_B;
+
+	//Day and Average
+	delete day_text;
+	delete average_text;
+
+
+	//the waiting Lists panel
+	delete wtitle1;
+	delete wtitle2;
+	delete wtitle3;
+
+	delete waiting_miss;
+	delete Checkup_rovers;
+	delete waiting_Rovers;
+
+	delete events_log;
+	int nom_events = 0;
+
+	delete in_ex_list;
+	delete comp_miss_list;
+
+
+	delete sl1;
+	delete sl2;
+	delete sl3;
+
+
+}
 
 inline void MyCanvas::OnScroll(wxScrollEvent& event)
 {
@@ -213,6 +257,12 @@ inline void MyCanvas::OnStart(wxCommandEvent& event)
 	if (!p_station->check_valid_data())
 	{
 		bool isWritten = p_station->write_output_file();
+
+		error_dial = new wxMessageDialog(NULL,
+			wxT("Error: Wrong Input Data."), wxT("Error"), wxOK | wxICON_ERROR);
+		error_dial->ShowModal();
+
+		
 		return;
 	}
 
@@ -224,8 +274,19 @@ inline void MyCanvas::OnStart(wxCommandEvent& event)
 	}
 
 
-	bool isWritten = p_station->write_output_file(); //TODO: Create Dialogs Boxes to announce that info
+	bool isWritten = p_station->write_output_file();
 
+	if(isWritten)
+	{
+
+		info_dial = new wxMessageDialog(NULL,
+			wxT("Output File was Created."), wxT("Finished"), wxOK);
+		info_dial->ShowModal();
+		
+	}
+
+
+	
 }
 
 inline void MyCanvas::Update_Screen()
