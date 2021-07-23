@@ -3,7 +3,7 @@
 
 
 #### i added a GUI to the Program instead of the console.
-> The GUI is only in the Step-by-step Mode till now (will add the other later)
+> The GUI is only in the Step-by-step Mode till now (will add the other modes later)
 
 > feel free to add whatever features you see
 
