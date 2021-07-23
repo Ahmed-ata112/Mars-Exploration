@@ -1,25 +1,25 @@
 # Project: Mars-Exploration
-## Course Name: Data Structures and Algorithms
+#### same as the Forked Project [*here*](https://github.com/AhmedAlaa2024/Mars-Exploration)
 
-### This is an educational project for Data Structures and Algorithms, written in C++ using Visual Studio IDE. It is a simulation of a space station in Mars to explore the whole of Mars. So the station release its rovers and assign the messions to them everyday.
 
-# Features
-* There are 3 Modes:
-    * Iteractive Mode: Writing the simulation's stages day by day on the console and create the output file at the end fo simulation.
-    * Step By Step Mode: With every arbitary key press, the simulation move to the next stage (day) and create the output file when the simulation's stages are finished.
-    * Silent Mode: Create Output file of the simulation without showing the simulation stages on the console.
-    
-* There is an input and output files:
-    * The simulator read all the information and proccess them as it needs to start simulation. [input.txt]
-    * The output file contains the final statistics generated after the simulation. [output.txt]
+#### i added a GUI to the Program instead of the console.
+> The GUI is only in the Step-by-step Mode till now (will add the other later)
 
-* The simulation consists of:
-    * Status of the Mars Station at every day.
-    * Showing the numbers and IDs of the rovers in different states: (In Execution, In Checkup, In Avaliable) state
-    * Showing the numbers of the missions in different states: (In Execution, In Completed, In Avaliable) state
+> feel free to add whatever features you see
 
-# Team Members:
- - Ahmed Alaa El-Sayed Arabi Zidan
- - Ahmed Atta
- - Doaa Magdy
- - Rufaida Muhammad
+#### Setting-Up The Lib
+* **Open Properties**
+  1. In the C/C++ -> general:  
+	set the /include dir
+  2. In the Linker -> general:
+    set the lib dir (\lib\vc14x_x64_dll)
+  3. In the C/C++ -> preprocessor: change the definitions to be:  
+	>	_DEBUG  
+	>	_CONSOLE  
+	>	WXUSINGDLL  
+	>	wxMSVC_VERSION_AUTO  
+	>	wxMSVC_VERSION_ABI_COMPAT  
+	>	_CRT_SECURE_NO_WARNINGS
+
+
+* save and Restart Vs and it should work.
