@@ -27,4 +27,4 @@
 
 #### Image from the Program:
 
-![Image](assests/im1.png "while simulation")
+![Image](assests/im1.png "step-by-step simulation")
