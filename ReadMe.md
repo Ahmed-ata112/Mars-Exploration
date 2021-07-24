@@ -10,7 +10,7 @@
 #### Setting-Up The Lib
 * **Open Properties**
   1. In the C/C++ -> general:  
-	set the /include dir
+	set the (\include\msvc) and (\include) dir
   2. In the Linker -> general:
     set the lib dir (\lib\vc14x_x64_dll)
   3. In the C/C++ -> preprocessor: change the definitions to be:  

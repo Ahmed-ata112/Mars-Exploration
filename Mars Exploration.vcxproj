@@ -114,12 +114,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;WXUSINGDLL;wxMSVC_VERSION_AUTO;wxMSVC_VERSION_ABI_COMPAT;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\libs\wxwidgets\include\msvc;C:\libs\wxwidgets\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\libs\wxwidgets\lib\vc14x_x64_dll;C:\libs\wxwidgets\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -144,6 +146,8 @@
     <ClInclude Include="Defs.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Formulation.h" />
+    <ClInclude Include="FRAME.h" />
+    <ClInclude Include="Labeled_List.h" />
     <ClInclude Include="LinkedBAG.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkedPriorityQueue.h" />
@@ -173,11 +177,8 @@
   <ItemGroup>
     <Text Include="input.txt" />
     <Text Include="input_history.txt" />
-
     <Text Include="Team Contributions.txt" />
-
     <Text Include="output.txt" />
-
     <Text Include="Team Tasks.txt" />
     <Text Include="Test Cases\test#1.txt" />
     <Text Include="Test Cases\test#10.txt" />
@@ -193,7 +194,10 @@
     <Text Include="Test Cases\Tests Targets.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
     <None Include="phase 1 Report.docx" />
+    <None Include="ReadMe.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

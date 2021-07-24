@@ -72,6 +72,12 @@
     <ClInclude Include="LinkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FRAME.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Labeled_List.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MarsStation.cpp">
@@ -123,5 +129,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="phase 1 Report.docx" />
+    <None Include="ReadMe.md" />
+    <None Include=".gitignore" />
+    <None Include=".gitattributes" />
   </ItemGroup>
 </Project>
