@@ -1,8 +1,8 @@
 # Project: Mars-Exploration
-#### same as the Forked Project [*here*](https://github.com/AhmedAlaa2024/Mars-Exploration)
+#### Same as the Forked Project [*here*](https://github.com/AhmedAlaa2024/Mars-Exploration)
 
 
-#### i added a GUI to the Program instead of the console.
+#### I added a GUI to the Program instead of the console.
 > The GUI is only in the Step-by-step Mode till now (will add the other modes later)
 
 > feel free to add whatever features you see
@@ -22,7 +22,7 @@
 	>	_CRT_SECURE_NO_WARNINGS
 
 
-* save and Restart Vs and it should work.
+* Save and Restart Vs and it should work.
 
 
 #### Image from the Program:
