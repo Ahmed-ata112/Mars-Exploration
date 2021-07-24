@@ -199,6 +199,10 @@
     <None Include="phase 1 Report.docx" />
     <None Include="ReadMe.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="assests\im1.png" />
+    <Image Include="im1.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
