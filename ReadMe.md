@@ -1,5 +1,5 @@
 # Project: Mars-Exploration
-#### Same as the Forked Project [*here*](https://github.com/AhmedAlaa2024/Mars-Exploration)
+#### Same as the Base Project [*here*](https://github.com/AhmedAlaa2024/Mars-Exploration)
 
 
 #### I added a GUI to the Program instead of the console.
