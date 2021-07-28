@@ -58,15 +58,11 @@ public:
 	titled_List_panel* comp_miss_list;
 
 
-	wxStaticLine* sl1;
-	wxStaticLine* sl2;
-	wxStaticLine* sl3;
-
 	~MyCanvas();
 };
 
 MyCanvas::MyCanvas(const wxString& title)
-	:wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(750, 600))
+	:wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600))
 {
 	wxFrame::SetMinSize(wxSize(700, 600));
 
@@ -194,37 +190,7 @@ inline MyCanvas::~MyCanvas()
 
 
 	delete p_station;
-	//upper part
-
-	delete slider;
-	delete slider_label;
-	delete slider_value;
-	delete Start_B;
-
-	//Day and Average
-	delete day_text;
-	delete average_text;
-
-
-	//the waiting Lists panel
-	delete wtitle1;
-	delete wtitle2;
-	delete wtitle3;
-
-	delete waiting_miss;
-	delete Checkup_rovers;
-	delete waiting_Rovers;
-
-	delete events_log;
-	int nom_events = 0;
-
-	delete in_ex_list;
-	delete comp_miss_list;
-
-
-	delete sl1;
-	delete sl2;
-	delete sl3;
+	
 
 
 }
