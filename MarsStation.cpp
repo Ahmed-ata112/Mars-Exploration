@@ -32,20 +32,9 @@ SIM_MODE MarsStation::get_input_mode() const
 
 void MarsStation::execute_mode(SIM_MODE mode)
 {
-	if (mode == SIM_MODE::INTERACTIVE)
-	{
-		my_ui->InteractivePrinting();
-	}
-	else if (mode == SIM_MODE::STEP_BY_STEP)
-	{
-		my_ui->StepByStepPrinting();
-
-	}
-	else
-	{
+	
 		my_ui->SilentPrinting();
 
-	}
 }
 
 

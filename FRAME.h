@@ -8,7 +8,9 @@
 
 #include "Formulation.h"
 #include "Promotion.h"
-wxDEFINE_EVENT(START_SIMULATION, wxCommandEvent);
+
+
+//wxDEFINE_EVENT(START_SIMULATION, wxCommandEvent);
 
 
 class MyCanvas : public wxFrame
@@ -18,21 +20,26 @@ public:
 	wxMessageDialog* error_dial;
 	wxMessageDialog* info_dial;
 
-	
+
 	MarsStation* p_station;
+	void init_station();
 	//upper part
 
 	wxSlider* slider;
 	wxStaticText* slider_label;
 	wxStaticText* slider_value;
 	wxButton* Start_B;
+	wxButton* Pause_B;
+	wxButton* Step_B;
 
 
 
 	void OnScroll(wxScrollEvent& event);
 	void Update_Screen();
-	void OnClick(wxCommandEvent& event);
+	//void OnClick(wxCommandEvent& event);
 	void OnStart(wxCommandEvent& event);
+	void OnPause(wxCommandEvent& event);
+	void OnStep(wxCommandEvent& event);
 
 
 
@@ -57,15 +64,16 @@ public:
 	titled_List_panel* in_ex_list;
 	titled_List_panel* comp_miss_list;
 
+	bool continue_sim;
 
 	~MyCanvas();
 };
 
 MyCanvas::MyCanvas(const wxString& title)
-	:wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600))
+	:wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600)), continue_sim(true)
 {
 	wxFrame::SetMinSize(wxSize(700, 600));
-
+	init_station();
 	//designing that shit
 
 	wxPanel* panel = new wxPanel(this, -1);
@@ -78,17 +86,18 @@ MyCanvas::MyCanvas(const wxString& title)
 	slider = new wxSlider(panel, ID_SLIDER, 2, 0, 20, wxPoint(-1, -1),
 		wxSize(200, -1), wxSL_HORIZONTAL);
 
-	Start_B = new wxButton(panel, ID_Start_B, wxT("Start Simulation"));;
-
+	Start_B = new wxButton(panel, ID_Start_B, wxT("Start"));
+	Pause_B = new wxButton(panel, ID_Pause_B, wxT("Pause"));
+	Step_B = new wxButton(panel, ID_Step_B, wxT("Step"));
 
 	Connect(ID_SLIDER, wxEVT_COMMAND_SLIDER_UPDATED,
 		wxScrollEventHandler(MyCanvas::OnScroll));
-
-	Connect(ID_Start_B, wxEVT_COMMAND_BUTTON_CLICKED,
-		wxCommandEventHandler(MyCanvas::OnStart));
-
-	//Bind(START_SIMULATION, &MyCanvas::OnStart, this);
-
+	//Bind is Better than Connect
+	Start_B->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MyCanvas::OnStart, this);
+	Pause_B->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MyCanvas::OnPause, this);
+	Step_B->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MyCanvas::OnStep, this);
+	
+	
 	slider_value = new wxStaticText(panel, ID_SLIDER_value, wxT("1.00"));
 	h_upper_box->AddSpacer(10);
 
@@ -97,6 +106,8 @@ MyCanvas::MyCanvas(const wxString& title)
 	h_upper_box->Add(slider_value, 0, wxEXPAND | wxUP, 10);
 	h_upper_box->AddSpacer(10);
 	h_upper_box->Add(Start_B, 0, wxEXPAND | wxALL, 5);
+	h_upper_box->Add(Pause_B, 0, wxEXPAND | wxALL, 5);
+	h_upper_box->Add(Step_B, 0, wxEXPAND | wxALL, 5);
 
 
 
@@ -106,7 +117,7 @@ MyCanvas::MyCanvas(const wxString& title)
 
 	wxBoxSizer* v_miss_with_average_and_day_box = new wxBoxSizer(wxVERTICAL);
 
-	day_text = new wxStaticText(panel, -1, wxT("DAY: 00"),wxPoint(-1,-1),wxSize(300,-1));
+	day_text = new wxStaticText(panel, -1, wxT("DAY: 00"), wxPoint(-1, -1), wxSize(300, -1));
 
 
 
@@ -148,7 +159,7 @@ MyCanvas::MyCanvas(const wxString& title)
 
 
 
-	average_text = new wxStaticText(panel, -1, wxT("Average Waiting time: 0.00"),wxPoint(-1, -1), wxSize(300, -1));
+	average_text = new wxStaticText(panel, -1, wxT("Average Waiting time: 0.00"), wxPoint(-1, -1), wxSize(300, -1));
 
 	v_miss_with_average_and_day_box->Add(day_text, 0, wxEXPAND | wxALL, 10);
 	wxStaticLine* sl1 = new wxStaticLine(panel, wxID_ANY, wxPoint(-1, -1),
@@ -183,6 +194,20 @@ MyCanvas::MyCanvas(const wxString& title)
 	panel->SetSizer(v_all_box);
 	Center();
 }
+
+inline void MyCanvas::init_station()
+{
+	p_station = new MarsStation;
+	if (!p_station->check_valid_data())
+	{
+		bool isWritten = p_station->write_output_file();
+
+		error_dial = new wxMessageDialog(NULL,
+			wxT("Error: Wrong Input Data."), wxT("Error"), wxOK | wxICON_ERROR);
+		error_dial->ShowModal();
+	}
+
+}
 inline MyCanvas::~MyCanvas()
 {
 	delete error_dial;
@@ -190,7 +215,7 @@ inline MyCanvas::~MyCanvas()
 
 
 	delete p_station;
-	
+
 
 
 }
@@ -204,64 +229,73 @@ inline void MyCanvas::OnScroll(wxScrollEvent& event)
 
 }
 
-inline void MyCanvas::OnClick(wxCommandEvent& event)
-{
 
-
-	wxCommandEvent eve(START_SIMULATION); // No specific id
-
-
-	//// Then post the event
-	wxPostEvent(this, eve); // to ourselves
-
-}
 inline void MyCanvas::OnStart(wxCommandEvent& event)
 {
 	wxTheApp->Yield();
-	p_station = new MarsStation;
+	
 
-	if (!p_station->check_valid_data())
-	{
-		bool isWritten = p_station->write_output_file();
-
-		error_dial = new wxMessageDialog(NULL,
-			wxT("Error: Wrong Input Data."), wxT("Error"), wxOK | wxICON_ERROR);
-		error_dial->ShowModal();
-
-		
-		return;
-	}
-
-	while (!p_station->check_last_day())
+	continue_sim = true; //to continue it if it was paused
+	while (continue_sim && !p_station->check_last_day())
 	{
 		p_station->simulate_day();
 		Update_Screen();
 		Sleep(slider->GetValue() / 2.0 * 1000);
 	}
 
-
-	bool isWritten = p_station->write_output_file();
-
-	if(isWritten)
+	if (p_station->check_last_day())
 	{
 
-		info_dial = new wxMessageDialog(NULL,
-			wxT("Output File was Created."), wxT("Finished"), wxOK);
-		info_dial->ShowModal();
-		
+		bool isWritten = p_station->write_output_file();
+
+		if (isWritten)
+		{
+
+			info_dial = new wxMessageDialog(NULL,
+				wxT("Output File was Created."), wxT("Finished"), wxOK);
+			info_dial->ShowModal();
+
+		}
 	}
 
 
-	
+
 }
 
+void MyCanvas::OnPause(wxCommandEvent& event)
+{
+	continue_sim = false;
+
+}
+void MyCanvas::OnStep(wxCommandEvent& event)
+{
+	p_station->simulate_day();
+	Update_Screen();
+
+
+
+	if (p_station->check_last_day())
+	{
+
+		bool isWritten = p_station->write_output_file();
+
+		if (isWritten)
+		{
+
+			info_dial = new wxMessageDialog(NULL,
+				wxT("Output File was Created."), wxT("Finished"), wxOK);
+			info_dial->ShowModal();
+
+		}
+	}
+}
 inline void MyCanvas::Update_Screen()
 {
 	wxTheApp->Yield();
 
 	//wxString stringnumber = wxString::Format(wxT( "DAY %.0f"), p_station->get_current_day());
 
-	day_text->SetLabel("DAY: "+ std::to_string(p_station->get_current_day()));
+	day_text->SetLabel("DAY: " + std::to_string(p_station->get_current_day()));
 
 	waiting_miss->Clear();
 	// First --> print the ID of the E missions
@@ -474,7 +508,7 @@ inline void MyCanvas::Update_Screen()
 	int no_completed = p_station->get_completed_missions_().getItemCount();
 	for (int i = 1; i <= no_completed; i++)   //itemCount does not change during this loop
 	{
-		
+
 		std::string ss = "Mission";
 		Mission* mm = p_station->get_completed_missions_().getEntry(i);
 		waiting_days += mm->getWD();
@@ -542,7 +576,7 @@ inline void MyCanvas::Update_Screen()
 	{
 		average_text->SetLabel(wxString::Format(wxT("Average Waiting time: %.2f"), waiting_days / no_completed));
 	}
-	
+
 
 
 

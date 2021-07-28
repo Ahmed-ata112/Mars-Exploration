@@ -37,7 +37,7 @@ int main()
 	
 
 	SIM_MODE mode = UI::get_input_mode();
-	if (mode == SIM_MODE::STEP_BY_STEP) //as i only implement the Step by Step Here
+	if (mode == SIM_MODE::INTERACTIVE) //as i only implement the Step by Step Here
 	{
 		wxEntry();
 	}
