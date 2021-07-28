@@ -134,7 +134,7 @@ MyCanvas::MyCanvas(const wxString& title)
 		, wxTE_MULTILINE | wxTE_BESTWRAP | wxTE_READONLY);
 	//waiting_miss->SetWindowStyleFlag(wxTE_MULTILINE | wxTE_BESTWRAP);
 
-	wtitle2 = new wxStaticText(panel, -1, wxT("in-Checkup rovers"));
+	wtitle2 = new wxStaticText(panel, -1, wxT("in-Checkup Rovers"));
 	Checkup_rovers = new wxTextCtrl(panel, ID_WAIT_MISS_TEXT, wxEmptyString, wxPoint(-1, -1), wxDefaultSize
 		, wxTE_MULTILINE | wxTE_BESTWRAP | wxTE_READONLY);
 
